@@ -1,8 +1,9 @@
 import React, {useState} from 'react'
 import PropTypes from 'prop-types';
 
+var estado = 0;
 export const AddCategory = ( {setCategories} ) => {
-
+    
     //estado
     const [inputValue, setInputValue] = useState('Buscar Gifs')
     //const para recibir info del teclado
@@ -12,11 +13,21 @@ export const AddCategory = ( {setCategories} ) => {
 
     const handleSubmit = (e) =>{
         e.preventDefault();
+        estado+=1;
 
-        if( inputValue.trim().length > 2){
+        if(inputValue.trim().length > 2 && estado<5){
             setCategories( c => [inputValue, ...c]);
             setInputValue('');
+        }else{
+            estado = 0;
+            setCategories( c => [inputValue]);
+            setInputValue('');
         }
+
+        /* if( inputValue.trim().length > 2){
+            setCategories( c => [inputValue, ...c]);
+            setInputValue('');
+        } */
 
     }
 
